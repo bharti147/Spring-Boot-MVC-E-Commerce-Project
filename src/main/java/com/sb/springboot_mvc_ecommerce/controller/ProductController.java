@@ -17,11 +17,13 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    //get method for all products
     @GetMapping("/products")
     public ResponseEntity<List<Product>> getProducts(){
         return new ResponseEntity<>(productService.getProducts(), HttpStatus.OK);
     }
 
+    //get method for search by id
     @GetMapping("/product/{id}")
     public ResponseEntity<Product> getProduct(@PathVariable int id){
         Product product = productService.getProduct(id);
