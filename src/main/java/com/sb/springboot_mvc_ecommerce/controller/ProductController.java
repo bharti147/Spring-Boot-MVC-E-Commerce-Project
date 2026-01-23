@@ -64,6 +64,32 @@ public class ProductController {
         }
 
 
+    //put method
+    @PutMapping("/product/{id}")
+    public ResponseEntity<String> updateProduct(@PathVariable int id, @RequestPart Product product, @RequestPart MultipartFile imageFile){
+       Product updatedProduct = null;
+      try{
+         updatedProduct = productService.addOrUpdateProduct(product, imageFile);
+          return new ResponseEntity<>("updated", HttpStatus.OK);
+      }
+      catch(Exception e){
+          return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+      }
+    }
+
+    //delete method
+    @DeleteMapping("/product/{id}")
+    public ResponseEntity<String> deleteProduceById(@PathVariable int id){
+        Product product = productService.getProduct(id);
+        if(product!=null){
+            productService.deleteProductById(id);
+            return new ResponseEntity<>("Deleted", HttpStatus.OK);
+        }
+        else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+
 
 
 

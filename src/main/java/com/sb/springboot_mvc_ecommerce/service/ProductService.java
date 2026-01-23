@@ -29,4 +29,8 @@ public class ProductService {
         product.setImageData(image.getBytes());
         return repo.save(product);
     }
+
+    public void deleteProductById(int id){
+         repo.deleteById(id);
+    }
 }
